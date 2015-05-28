@@ -1,2 +1,2 @@
 # GoTicTacToe
-Learning to program in go at Google IO Lanoir
+Learning to program in go at Google IO Lenoir
