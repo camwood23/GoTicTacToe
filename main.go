@@ -1,5 +1,4 @@
-//Need to add a win condition and a way to stop someone from
-//choosing an already taken spot.
+//Need to add a win condition
 package main
 
 import (
@@ -23,12 +22,14 @@ func main() {
         fmt.Println("\nPlayer " + strconv.Itoa(player + 1) + " pick a space")
         fmt.Scan(&i)
         fmt.Println()
-        if player == 0 {
-            board[i] = "X"
-        } else {
-            board[i] = "O"
+        if board[i] != "X" && board[i] != "O" {
+            if player == 0 {
+                board[i] = "X"
+            } else {
+                board[i] = "O"
+            }
+            player = (player + 1) % 2
         }
-        player = (player + 1) % 2
     }
 }
 
