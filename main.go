@@ -1,17 +1,27 @@
+//Need to incorporate user input and a win condition
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "strconv"
+)
 
-var board [9]int
+//Need this to be a String so it can store X's and O's
+var board [9]string
 
 
 func main() {
     i := 0
     for i < 9 {
-        board[i] = i
+        //Need to figure out how to convert ints into strings for this line
+        board[i] = strconv.Itoa(i)
         i += 1
     }
-    printBoard()
+    for 1 > 0 {
+        printBoard()
+        fmt.Scan(&i)
+        board[i] = "X"
+    }
 }
 
 func printBoard() {
