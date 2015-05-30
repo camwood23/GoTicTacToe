@@ -1,4 +1,5 @@
-//Need to incorporate user input and a win condition
+//Need to add a win condition and a way to stop someone from
+//choosing an already taken spot.
 package main
 
 import (
@@ -6,21 +7,28 @@ import (
     "strconv"
 )
 
-//Need this to be a String so it can store X's and O's
 var board [9]string
-
 
 func main() {
     i := 0
     for i < 9 {
-        //Need to figure out how to convert ints into strings for this line
         board[i] = strconv.Itoa(i)
         i += 1
     }
+
+    player := 0
+    //Game loop, need a win condition to break loop
     for 1 > 0 {
         printBoard()
+        fmt.Println("\nPlayer " + strconv.Itoa(player + 1) + " pick a space")
         fmt.Scan(&i)
-        board[i] = "X"
+        fmt.Println()
+        if player == 0 {
+            board[i] = "X"
+        } else {
+            board[i] = "O"
+        }
+        player = (player + 1) % 2
     }
 }
 
