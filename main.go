@@ -9,6 +9,7 @@ var board [3][3]string
 
 func main() {
     i, j, a, player := 0, 0, 0, 0
+    noWin, tie := true, false
     for i < 3 {
         for j < 3 {
             board[i][j] = strconv.Itoa(a)
@@ -19,7 +20,7 @@ func main() {
         i += 1
     }
 
-    for winCondition() {
+    for noWin {
         i, j = 0, 0
         printBoard()
         fmt.Println("\nPlayer " + strconv.Itoa(player + 1) + " pick a space")
@@ -40,31 +41,43 @@ func main() {
             j = 0
             i += 1
         }
+        noWin, tie = winCondition()
     }
     printBoard()
-    if player == 0 {
+    if tie {
+        fmt.Println("\nTie")
+    } else if player == 0 {
         fmt.Println("\nPlayer 2 won!")
     } else {
         fmt.Println("\nPlayer 1 won!")
     }
 }
 
-func winCondition() bool {
+func winCondition() (bool, bool) {
+    boardFull := true
     for i := 0; i < 3; i++ {
         if board[i][0] == board[i][1] && board[i][0] == board[i][2] {
-            return false
+            return false, false
         }
         if board[0][i] == board[1][i] && board[0][i] == board[2][i] {
-            return false
+            return false, false
         }
     }
     if board[0][0] == board[1][1] && board[0][0] == board[2][2] {
-        return false
+        return false, false
     }
     if board[0][2] == board[1][1] && board[0][2] == board[2][0] {
-        return false
+        return false, false
     }
-    return true
+
+    for i := 0; i < 3; i++ {
+        for j := 0; j < 3; j++ {
+            if board[i][j] != "X" && board[i][j] != "O" {
+                boardFull = false
+            }
+        }
+    }
+    return !boardFull, true
 }
 
 func printBoard() {
